@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:school_management/util/color.dart';
 import 'package:school_management/util/data.dart';
+import 'package:school_management/widgets/feature.dart';
+import 'package:school_management/widgets/popular.dart';
 
 import '../widgets/categoty_item.dart';
 import '../widgets/custom_textbox.dart';
@@ -58,7 +60,7 @@ class _HomeViewState extends State<HomeView> {
             const SizedBox(height: 10,),
             Container(
                margin:  const EdgeInsets.only(left: 15, right: 15),
-            child: CustomTextBox(hint: "Search", prefix: const Icon(Icons.search, color: darker), suffix: const Icon(Icons.filter_list_outlined, color: primary))
+            child: const CustomTextBox(hint: "Search", prefix: Icon(Icons.search, color: darker), suffix: Icon(Icons.filter_list_outlined, color: primary))
               
 
             ),
@@ -72,48 +74,48 @@ class _HomeViewState extends State<HomeView> {
                 borderRadius: BorderRadius.circular(15),
                 image: const DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage("https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTF8fHByb2ZpbGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",)
+                  image: NetworkImage("https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80",)
                 )
               ),
 
             ),
 
-             SizedBox(height: 25,),
+             const SizedBox(height: 25,),
 
               Container(
-              margin: EdgeInsets.only(left: 0),
+              margin: const EdgeInsets.only(left: 0),
               child: listCategories(),
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
 
             Container(
-              margin: EdgeInsets.only(left: 15, right: 15),
+              margin: const EdgeInsets.only(left: 15, right: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Text("Popular", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                   Text("See all", style: TextStyle(fontSize: 14, color: darker),),
                 ],
               ),
             ),
-            SizedBox(height: 5,),
+            const SizedBox(height: 5,),
 
             Container(
               child: listPopulars(),
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
 
 
             Container(
-              margin: EdgeInsets.only(left: 15, right: 15),
-              child: Text("Featured", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+              margin: const EdgeInsets.only(left: 15, right: 15),
+              child: const Text("Featured", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Container(
-              margin: EdgeInsets.only(left: 15, right: 15),
+              margin: const EdgeInsets.only(left: 15, right: 15),
               child: listFeatured(),
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
 
 
             
@@ -126,12 +128,29 @@ class _HomeViewState extends State<HomeView> {
   }
   
   listPopulars() {
+     return
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.only(left: 15),
+        child: Row(
+          children: List.generate(populars.length, 
+            (index) => PopularItem(data: populars[index])
+          ),
+        ),
+      );
 
 
 
   }
   
   listFeatured() {
+     return
+      Column(
+        children: List.generate(featured.length, 
+          (index) => FeaturedItem(data: featured[index])
+        ),
+      );
+  }
 
 
 
@@ -139,7 +158,7 @@ class _HomeViewState extends State<HomeView> {
   
   listCategories() {
 List<Widget> lists = List.generate(categories.length, (index) => CategoryItem(data: categories[index]));
-    lists.insert(0, CategoryItem(
+    lists.insert(0, const CategoryItem(
       data: {
         "name" : "All",
         "icon" : FontAwesomeIcons.th,
@@ -149,7 +168,7 @@ List<Widget> lists = List.generate(categories.length, (index) => CategoryItem(da
     return
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.only(bottom: 5, left: 15),
+        padding: const EdgeInsets.only(bottom: 5, left: 15),
         child: Row(
           children: lists
         ),
@@ -157,4 +176,7 @@ List<Widget> lists = List.generate(categories.length, (index) => CategoryItem(da
 
 
   }
-}
+
+
+
+
